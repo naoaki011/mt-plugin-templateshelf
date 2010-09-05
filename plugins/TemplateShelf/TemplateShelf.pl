@@ -48,6 +48,14 @@ sub _edit_tmpl_param {
             label => 'Template Modules',
             type  => 'custom'
         },
+        widget => {
+            label => 'Widgets',
+            type  => 'widget'
+        },
+        backup_templates => {
+            label => 'Backup Templates',
+            type  => 'backup_templates',
+        },
         system => {
             label => 'System Templates',
             type  => [ keys %$sys_tmpl ]

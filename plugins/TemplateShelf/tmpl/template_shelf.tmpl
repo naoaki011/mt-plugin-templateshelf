@@ -8,14 +8,12 @@
 			font-size:12px; 
 			float:left;
 		}
-	
 		#template-shelf p.create-link {
 			font-size: 11px;
 			text-align: right;
 			line-height: normal;
 			margin: 0;
 		}
-
 		#template-shelf #template-listing-container {
 			height: 370px;
 			overflow: auto;
@@ -23,28 +21,20 @@
 			margin-bottom: 15px;
 			clear: both;
 		}
-
 		#template-shelf li { 
 			padding: 3px 7px; 
 			display: block;
 		}
-
 		#template-shelf li p { margin: 0;}
-
 		#template-shelf li.selected { background: #FFFFDF;}
 		#template-shelf tr img.open-dialog { visibility: hidden; }
 		#template-shelf tr.hover img.open-dialog { visibility: visible; }
-		
 		#template-shelf .global a { color: #7F8833 !important; }
-		
 		.dialog-4 #container, .dialog-4 #content { overflow: visible; }
 		.dialog-4 #title-field #title { width: 100%; }
 		.dialog-4 .actions-bar { position: static;}
 		.dialog-4 .actions-bar-bottom { display: block; }
-		.dialog-4 .plugin-actions {
-			display: none;
-		}
-		
+		.dialog-4 .plugin-actions { display: none; }
 		.dialog-4 #archive_mapping-field { display: none; }
 	</style>
 	<mt:if name="is_dialog"><script type="text/javascript" src="<$mt:var name="static_uri"$>js/common/Cookie.js?v=<mt:var name="mt_version" escape="url">"></script></mt:if>
@@ -103,8 +93,10 @@
 			
 			var html = '<tr class="' + rowClass + '" mt:focus-hover="1">';
 			// html += '<td class="cb"><input type="checkbox" name="id" class="select" value="' + tmpl.id + '" /></td>';
-			html += '<td class="template-name"><a href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;blog_id=<mt:var name="blog_id">&amp;id=' + tmpl.id + '">' + tmpl.name + '</a></td>';
-			html += '<td><a href="#" onclick="return openDialog(this.form, \'view\', \'_type=template&amp;blog_id=' + tmpl.blog_id + '&amp;id=' + tmpl.id + '&amp;dialog=1\')"><img src="<mt:var name="static_uri">plugins/TemplateShelf/images/shape_move_backwards.png" style="float:right;" class="open-dialog" /></a></td>';
+			html += '<td class="template-name"><a href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;blog_id='
+			if (tmpl.blog_id != 0) { html += '<mt:var name="blog_id">'; } else { html += '0'; }
+			html += '&amp;id=' + tmpl.id + '">' + tmpl.name + '</a></td>';
+			// html += '<td><a href="#" onclick="return openDialog(this.form, \'view\', \'_type=template&amp;blog_id=' + tmpl.blog_id + '&amp;id=' + tmpl.id + '&amp;dialog=1\')"><img src="<mt:var name="static_uri">plugins/TemplateShelf/images/shape_move_backwards.png" style="float:right;" class="open-dialog" /></a></td>';
 			html += '</tr>';
 			document.getElementById('template-listing-table').getElementsByTagName('tbody')[0].innerHTML += html;
 			
@@ -144,13 +136,14 @@
 	<mtapp:widget id="template-shelf" label="Shelf">
 
 		<select name="templateshelf-filter" onchange="filterTemplates(this.value)" id="templateshelf-filter">
-			<option value=""><__trans phrase="All Templates"></option>
 			<mt:loop name="list_filters">
 				<option value="<mt:var name="key">"><mt:var name="label"></option>
 			</mt:loop>
 		</select>
 		
-		<p class="create-link" id="create-link"><a class="icon-left icon-create" href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;type=<mt:var name="type">&amp;blog_id=<mt:var name="blog_id">"><__trans phrase="Create"></a></p>
+		<p class="create-link" id="create-link">
+			<a class="icon-left icon-create" href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;type=<mt:var name="type">&amp;blog_id=<mt:var name="blog_id">"><__trans phrase="Create"></a>
+		</p>
 			
 		<br clear="all" />
 		<div id="template-listing-container" class="listing">
