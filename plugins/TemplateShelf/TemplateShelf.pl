@@ -49,12 +49,16 @@ sub _edit_tmpl_param {
             type  => 'custom'
         },
         widget => {
-            label => 'Widgets',
+            label => 'Widget Modules',
             type  => 'widget'
         },
         backup_templates => {
             label => 'Backup Templates',
             type  => 'backup_templates',
+        },
+        email => {
+            label => 'E-Mail',
+            type  => 'email'
         },
         system => {
             label => 'System Templates',

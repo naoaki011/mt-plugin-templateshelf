@@ -8,19 +8,25 @@
 			font-size:12px; 
 			float:left;
 		}
+	
 		#template-shelf p.create-link {
 			font-size: 11px;
 			text-align: right;
 			line-height: normal;
 			margin: 0;
 		}
+
 		#template-shelf #template-listing-container {
-			height: 370px;
+/*			height: 370px;*/
 			overflow: auto;
 			border: 1px solid #aaa;
 			margin-bottom: 15px;
 			clear: both;
 		}
+		#template-listing-table {
+			width: 95%;
+		}
+
 		#template-shelf li { 
 			padding: 3px 7px; 
 			display: block;
@@ -96,7 +102,7 @@
 			html += '<td class="template-name"><a href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;blog_id='
 			if (tmpl.blog_id != 0) { html += '<mt:var name="blog_id">'; } else { html += '0'; }
 			html += '&amp;id=' + tmpl.id + '">' + tmpl.name + '</a></td>';
-			// html += '<td><a href="#" onclick="return openDialog(this.form, \'view\', \'_type=template&amp;blog_id=' + tmpl.blog_id + '&amp;id=' + tmpl.id + '&amp;dialog=1\')"><img src="<mt:var name="static_uri">plugins/TemplateShelf/images/shape_move_backwards.png" style="float:right;" class="open-dialog" /></a></td>';
+			html += '<td><a class="mt-open-dialog" href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;blog_id=' + tmpl.blog_id + '&amp;id=' + tmpl.id + '"><img src="<mt:var name="static_uri">plugins/TemplateShelf/images/shape_move_backwards.png" style="float:right;" class="open-dialog" /></a></td>';
 			html += '</tr>';
 			document.getElementById('template-listing-table').getElementsByTagName('tbody')[0].innerHTML += html;
 			
@@ -136,14 +142,13 @@
 	<mtapp:widget id="template-shelf" label="Shelf">
 
 		<select name="templateshelf-filter" onchange="filterTemplates(this.value)" id="templateshelf-filter">
+			<mt:ignore><option value=""><__trans phrase="All Templates"></option></mt:ignore>
 			<mt:loop name="list_filters">
 				<option value="<mt:var name="key">"><mt:var name="label"></option>
 			</mt:loop>
 		</select>
 		
-		<p class="create-link" id="create-link">
-			<a class="icon-left icon-create" href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;type=<mt:var name="type">&amp;blog_id=<mt:var name="blog_id">"><__trans phrase="Create"></a>
-		</p>
+		<p class="create-link" id="create-link"><a class="icon-left icon-create" href="<mt:var name="script_url">?__mode=view&amp;_type=template&amp;type=<mt:var name="type">&amp;blog_id=<mt:var name="blog_id">"><__trans phrase="Create"></a></p>
 			
 		<br clear="all" />
 		<div id="template-listing-container" class="listing">
